@@ -13,28 +13,15 @@ public:
         return 0;
     }
     
-    int getPrevChar(char ch) {
-        switch(ch) {
-            case 'V': return 'I';
-            case 'X': return 'I';
-            case 'L': return 'X';
-            case 'C': return 'X';
-            case 'D': return 'C';
-            case 'M': return 'C';
-        }
-        return '\0';
-    }
-    
     int romanToInt(string s) {
-        int res = 0;
-        
+        int res = 0;   
         while(!s.empty()) {
-            char prev = getPrevChar(s.back());
-            res += getNum(s.back());
+            int cur = getNum(s.back());
+            res += cur;
             s.pop_back();
-            if(!s.empty() && s.back() == prev) {
+            if(!s.empty() && getNum(s.back()) < cur) {
+                res -= getNum(s.back());
                 s.pop_back();
-                res -= getNum(prev);
             }
         }
         

@@ -32,7 +32,7 @@ public:
             char prev = getPrevChar(s.back());
             res += getNum(s.back());
             s.pop_back();
-            while(!s.empty() && s.back() == prev) {
+            if(!s.empty() && s.back() == prev) {
                 s.pop_back();
                 res -= getNum(prev);
             }

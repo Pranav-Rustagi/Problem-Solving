@@ -8,15 +8,11 @@ public:
         arr.clear();
         for(auto p : freq)
             arr.push_back(p.second);
-        sort(arr.begin(), arr.end());
+        sort(arr.rbegin(), arr.rend());
         
         int res = 0;
-        while(arr.size() && lim > 0) {
-            lim -= arr.back();
-            arr.pop_back();
-            ++res;
-        }
-        
+        for(int i = 0 ; i < arr.size() && lim > 0 ; ++i, ++res)
+            lim -= arr[i];
         return res;
     }
 };

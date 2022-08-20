@@ -12,16 +12,23 @@
 class Solution {
 public:
     vector<int> v;
-    
-    void t(TreeNode* r) {
-        if(r) {
-            t(r -> left);
-            t(r -> right);
-            v.push_back(r -> val);
-        }
-    }
     vector<int> postorderTraversal(TreeNode* root) {
-        t(root);
+        if(root) {
+            stack<TreeNode*> s;
+            s.push(root);
+            while(!s.empty()) {
+                root = s.top();
+                s.pop();
+                v.push_back(root -> val);
+                if(root -> left)
+                    s.push(root -> left);
+                if(root -> right)
+                    s.push(root -> right);
+            }
+            
+            reverse(v.begin(), v.end());
+                
+        }
         return v;
     }
 };

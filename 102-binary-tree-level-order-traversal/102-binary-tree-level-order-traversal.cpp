@@ -16,7 +16,7 @@ public:
     void s(TreeNode* r, int l) {
         if(r) {
             if(l == v.size())
-                v.push_back(vector<int>());
+                v.push_back({});
             v[l].push_back(r -> val);
             s(r -> left, l + 1);
             s(r -> right, l + 1);

@@ -7,11 +7,12 @@ public:
         }
         
         sort(capacity.begin(), capacity.end());
-        for(int i = 0 ; i < capacity.size() ; ++i) {
-            if(capacity[i] > additionalRocks)
+        
+        for(int& c : capacity) {
+            if(c > additionalRocks)
                 break;
             ++res;
-            additionalRocks -= capacity[i];
+            additionalRocks -= c;
         }
         
         return res;

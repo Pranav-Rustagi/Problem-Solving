@@ -10,6 +10,17 @@
  */
 class Solution {
 public:
+    ListNode* rev(ListNode *cur) {
+        ListNode *prev = NULL, *next;
+        while(cur) {
+            next = cur -> next;
+            cur -> next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
+    
     bool isPalindrome(ListNode* head) {
         ListNode *slow = head, *fast = head, *temp;
         while(fast && fast -> next) {
@@ -17,18 +28,12 @@ public:
             fast = fast -> next -> next;
         }
         
-        fast = NULL;
-        while(slow) {
-            temp = slow -> next;
-            slow -> next = fast;
-            fast = slow;
-            slow = temp;
-        }
+        temp = rev(slow);
         
-        while(fast) {
-            if(fast -> val != head -> val)
+        while(temp) {
+            if(temp -> val != head -> val)
                 return false;
-            fast = fast -> next;
+            temp = temp -> next;
             head = head -> next;
         }
         

@@ -9,9 +9,7 @@ public:
             if((++count % 3) == 0)
                 res.push_back('.');
         }
-        
-        if(res.back() == '.')
-            res.pop_back();
+        if(res.back() == '.') res.pop_back();
         reverse(res.begin(), res.end());
         return res.size() ? res : "0";
     }

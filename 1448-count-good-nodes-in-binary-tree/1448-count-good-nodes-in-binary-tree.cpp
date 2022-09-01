@@ -17,9 +17,9 @@ public:
         if(root) {
             if(root -> val >= maxEl) {
                 ++r;
+                maxEl = root -> val;
             }
             
-            maxEl = max(maxEl, root -> val);
             solve(root -> left, maxEl);
             solve(root -> right, maxEl);
         }

@@ -37,7 +37,7 @@ public:
                 }
                 
                 q1 = q2;
-                q2 = queue<Node*>();
+                q2 = {};
             }
         }
         

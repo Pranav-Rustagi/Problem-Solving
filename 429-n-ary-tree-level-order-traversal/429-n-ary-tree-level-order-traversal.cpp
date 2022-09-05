@@ -23,20 +23,19 @@ public:
     vector<vector<int>> levelOrder(Node* root) {
         if(!root) return {};
         vector<vector<int>> v;
-        queue<Node*> q1, q2;
-        q1.push(root);
-        while(!q1.empty()) {
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty()) {
             v.push_back({});
-            while(!q1.empty()) {
-                root = q1.front();
-                q1.pop();
+            int sz = q.size();
+            while(sz--) {
+                root = q.front();
+                q.pop();
                 v.back().push_back(root -> val);
                 for(auto& node : root -> children) {
-                    q2.push(node);
+                    q.push(node);
                 }
             }
-            q1 = q2;
-            q2 = {};
         }
         return v;
     }

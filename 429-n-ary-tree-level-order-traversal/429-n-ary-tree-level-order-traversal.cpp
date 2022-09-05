@@ -31,7 +31,7 @@ public:
                     root = q1.front();
                     q1.pop();
                     v.back().push_back(root -> val);
-                    for(auto node : root -> children) {
+                    for(auto& node : root -> children) {
                         q2.push(node);
                     }
                 }

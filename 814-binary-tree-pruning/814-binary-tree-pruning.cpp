@@ -11,30 +11,18 @@
  */
 class Solution {
 public:
-    bool hasOne(TreeNode* root) {
-        if(!root)
-            return false;
-        if(root -> val == 1)
-            return true;
-        return hasOne(root -> right) || hasOne(root -> left);
-    }
-    
-    void prune(TreeNode* root) {
-        if(root) {
-            if(hasOne(root -> left))
-                prune(root -> left);
-            else
-                root -> left = NULL;
-            
-            if(hasOne(root -> right))
-                prune(root -> right);
-            else
-                root -> right = NULL;
-        }
+    bool shouldPrune(TreeNode* root) {
+        if(!root) return false;
+        bool hasOneOnLeft = shouldPrune(root -> left);
+        bool hasOneOnRight = shouldPrune(root -> right);
+        if(!hasOneOnLeft) root -> left = NULL;
+        if(!hasOneOnRight) root -> right = NULL;
+        return root -> val == 1 || hasOneOnLeft || hasOneOnRight;
     }
     
     TreeNode* pruneTree(TreeNode* root) {
-        prune(root);  
-        return (root -> val == 0 && root -> left == NULL && root -> right == NULL) ? NULL : root;
+        if(!shouldPrune(root))
+            return NULL;
+        return root;
     }
 };

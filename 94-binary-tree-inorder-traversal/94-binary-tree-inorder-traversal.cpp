@@ -12,24 +12,15 @@
 class Solution {
 public:
     vector<int> v;
-    
-    vector<int> inorderTraversal(TreeNode* root) {
+    void traverse(TreeNode* root) {
         if(root) {
-            stack<TreeNode*> s;
-            
-            while(root || !s.empty()) {
-                while(root) {
-                    s.push(root);
-                    root = root -> left;
-                }
-                
-                root = s.top();
-                s.pop();
-                v.push_back(root -> val);
-                root = root -> right;
-            }
+            traverse(root -> left);
+            v.push_back(root -> val);
+            traverse(root -> right);
         }
-        
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        traverse(root);
         return v;
     }
 };

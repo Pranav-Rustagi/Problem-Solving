@@ -14,7 +14,6 @@ public:
                 break;
             }
         }
-        
         if(i == j && power >= tokens[i])
             ++score;
         return score;

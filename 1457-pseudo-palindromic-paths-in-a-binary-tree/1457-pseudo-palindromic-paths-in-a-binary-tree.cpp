@@ -12,16 +12,16 @@
 class Solution {
 public:
     int res = 0;
-    unordered_map<int, int> m;
+    int arr[10];
     
     void traverse(TreeNode* root) {
         if(root) {
-            ++m[root -> val];
+            ++arr[root -> val];
             
             if(!root -> left && !root -> right) {
                 int oddC = 0;
-                for(auto & p : m)
-                    if(p.second & 1)
+                for(int i = 0 ; i < 10 ; ++i)
+                    if(arr[i] & 1)
                         if(++oddC > 1)
                             break;
                 if(oddC <= 1)
@@ -30,7 +30,7 @@ public:
                 traverse(root -> left);
                 traverse(root -> right);
             }
-            --m[root -> val];
+            --arr[root -> val];
         }
     }
     

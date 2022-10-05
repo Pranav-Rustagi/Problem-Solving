@@ -11,12 +11,11 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* root, int val, int depth) {
+    void solve(TreeNode* root, int& val, int depth) {
         if(root) {
             if(depth == 2) {
-                TreeNode *left = root -> left, *right = root -> right;
-                root -> left = new TreeNode(val, left, NULL);
-                root -> right = new TreeNode(val, NULL, right);
+                root -> left = new TreeNode(val, root -> left, NULL);
+                root -> right = new TreeNode(val, NULL, root -> right);
             } else {
                 solve(root -> left, val, depth - 1);
                 solve(root -> right, val, depth - 1);
@@ -24,12 +23,10 @@ public:
         }
     }
     
-    TreeNode* addOneRow(TreeNode* root, int val, int depth) {
-        if(depth == 1) {
-            root = new TreeNode(val, root, NULL);
-        } else {
-            solve(root, val, depth);
-        }
+    TreeNode* addOneRow(TreeNode* root, int& val, int depth) {
+        if(depth == 1)
+            return new TreeNode(val, root, NULL);
+        solve(root, val, depth);
         return root;
     }
 };

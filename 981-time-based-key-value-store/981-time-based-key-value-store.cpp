@@ -19,9 +19,6 @@ public:
     }
 };
 
-// ["TimeMap","set","set","get","set","get","get"]
-// [[],["a","bar",1],["x","b",3],["b",3],["foo","bar2",4],["foo",4],["foo",5]]
-
 /**
  * Your TimeMap object will be instantiated and called as such:
  * TimeMap* obj = new TimeMap();

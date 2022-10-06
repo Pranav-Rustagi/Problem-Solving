@@ -10,10 +10,8 @@ public:
     }
     
     string get(string key, int timestamp) {
-        if((*m).find(key) == (*m).end())
+        if(((*m).find(key) == (*m).end()) || ((*m)[key].begin() -> first > timestamp))
             return  "";
-        if((*m)[key].begin() -> first > timestamp)
-            return "";
         auto iter = (*m)[key].upper_bound(timestamp);
         return (*(--iter)).second;
     }

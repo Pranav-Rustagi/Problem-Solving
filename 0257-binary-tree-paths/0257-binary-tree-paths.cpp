@@ -12,17 +12,22 @@
 class Solution {
 public:
     vector<string> v;
-    void traverse(TreeNode* root, string s = "") {
+    vector<int> els;
+    void traverse(TreeNode* root) {
         if(root) {
-            s += to_string(root -> val) + "->";
-            if(root -> right || root -> left) {
-                traverse(root -> left, s);
-                traverse(root -> right, s);
+            els.push_back(root -> val);
+            if(root -> left || root -> right) {
+                traverse(root -> left);
+                traverse(root -> right);
             } else {
+                string s;
+                for(int & el : els)
+                    s += to_string(el) + "->";
                 s.pop_back();
                 s.pop_back();
                 v.push_back(s);
             }
+            els.pop_back();
         }
     }
     

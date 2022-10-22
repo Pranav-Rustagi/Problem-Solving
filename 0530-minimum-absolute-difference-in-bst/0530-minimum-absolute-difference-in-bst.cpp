@@ -12,18 +12,18 @@
 class Solution {
 public:
     vector<int> v;
+    int res = INT_MAX;
     void traverse(TreeNode* root) {
         if(root) {
             traverse(root -> left);
+            if(v.size())
+                res = min(res, abs(root -> val - v.back()));
             v.push_back(root -> val);
             traverse(root -> right);
         }
     }
     int getMinimumDifference(TreeNode* root) {
-        int res = INT_MAX;
         traverse(root);
-        for(int i = 1 ; i < v.size() ; ++i)
-            res = min(res, v[i] - v[i - 1]);
         return res;
     }
 };

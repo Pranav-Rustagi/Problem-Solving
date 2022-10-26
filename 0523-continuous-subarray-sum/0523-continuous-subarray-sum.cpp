@@ -6,7 +6,7 @@ public:
         int sum = 0;
         for(int i = 0 ; i < nums.size() ; ++i) {
             sum = (sum + nums[i]) % k;
-            if(m.find(sum) != m.end()) {
+            if(m.count(sum)) {
                 if(i - m[sum] > 1)
                     return true;
             } else {

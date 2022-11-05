@@ -14,13 +14,12 @@ class Solution {
         for(int i = 0 ; i < N ; ++i)
             ++mod[arr[i] % K];
             
-        int res = mod[0] > 0;
-        for(int i = 1 ; i < K ; ++i) {
-            if(i < K - i) {
-                res += max(mod[i], mod[K - i]);
-            } else if (i == K - i && mod[i]) {
-                ++res;
-            }
+        int res = (mod[0] > 0);
+        if (!(K & 1) && mod[K >> 1])
+            ++res;
+            
+        for(int i = 1, lim = (K - (!(K & 1))) >> 1 ; i <= lim ; ++i) {
+            res += max(mod[i], mod[K - i]);
         }
         
         return res;

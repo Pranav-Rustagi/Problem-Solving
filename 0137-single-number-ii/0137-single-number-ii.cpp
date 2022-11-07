@@ -5,7 +5,7 @@ public:
         for(int i = 0 ; i < 32 ; ++i) {
             int temp = 0;
             for(auto & el : nums) {
-                temp += ((el >> i) & 1);
+                temp += ((el & (1 << i)) >> i);
             }
             
             if(temp % 3)

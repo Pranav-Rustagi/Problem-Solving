@@ -10,13 +10,20 @@
  */
 class Solution {
 public:
-    ListNode* middleNode(ListNode* head) {
-        vector<ListNode*> v;
+    int getLen(ListNode* head) {
+        int count = 0;
         while(head) {
-            v.push_back(head);
+            ++count;
             head = head -> next;
         }
-        
-        return v[v.size() >> 1];
+        return count;
+    }
+    
+    ListNode* middleNode(ListNode* head) {
+        int n = (getLen(head) >> 1);
+        while(n--){
+            head = head -> next;
+        }
+        return head;
     }
 };

@@ -3,6 +3,7 @@
 using namespace std;
 
 // } Driver Code Ends
+
 class Solution
 {
     public:
@@ -13,8 +14,6 @@ class Solution
         while(n--)
             meetings.push_back({ start[n], end[n] });
         sort(meetings.begin(), meetings.end(), [](const vector<int> & a, const vector<int> & b) {
-            if(a[1] == b[1])
-                return a[0] < b[0];
             return a[1] < b[1];
         });
         

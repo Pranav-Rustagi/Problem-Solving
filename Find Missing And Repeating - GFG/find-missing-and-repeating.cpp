@@ -4,46 +4,25 @@
 using namespace std;
 
 // } Driver Code Ends
+
 class Solution{
 public:
     int *findTwoElement(int *arr, int n) {
-        int xorV = 0;
+        vector<int> count(n, 0);
         for(int i = 0 ; i < n ; i++) {
-            xorV ^= ((i + 1) ^ arr[i]);
+            count[arr[i] - 1]++;
         }
-        
-        int pos = 1;
-        while((pos & xorV) == 0)
-            pos <<= 1;
-            
-        int val1 = 0, val2 = 0;
+
+        int missing, repeated;
         for(int i = 0 ; i < n ; i++) {
-            if(pos & arr[i]) {
-                val1 ^= arr[i];
-            } else {
-                val2 ^= arr[i];
-            }
-            
-            if((i + 1) & pos) {
-                val1 ^= (i + 1);
-            } else {
-                val2 ^= (i + 1);
+            if(count[i] == 0) {
+                missing = i + 1;
+            } else if(count[i] == 2) {
+                repeated = i + 1;
             }
         }
-        
-        int *r = new int[2];
-        for(int i = 0 ; i < n ; i++) {
-            if(arr[i] == val1) {
-                r[0] = val1;
-                r[1] = val2;
-                break;
-            } else if(arr[i] == val2) {
-                r[0] = val2;
-                r[1] = val1;
-                break;
-            }
-        }
-        return r;
+        int *res(new int[2]{repeated, missing});
+        return res;
     }
 };
 

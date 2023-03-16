@@ -1,6 +1,6 @@
 # Find Missing And Repeating
 ## Medium
-<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given an unsorted array <strong>Arr</strong> of size <strong>N</strong> of positive integers. <strong>One number 'A'</strong> from set {1, 2, N} is missing and <strong>one number 'B'</strong> occurs twice in array. Find these two numbers.</span></p>
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given an unsorted array <strong>Arr</strong> of size <strong>N</strong> of positive integers. <strong>One number 'A'</strong> from set {1, 2,....,N} is missing and <strong>one number 'B'</strong> occurs twice in array. Find these two numbers.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 

@@ -8,20 +8,21 @@ using namespace std;
 class Solution{
 public:
     int *findTwoElement(int *arr, int n) {
-        vector<int> count(n, 0);
-        for(int i = 0 ; i < n ; i++) {
-            count[arr[i] - 1]++;
+        long long sum_all = 0, sumA = 0, sumSq_all = 0, sumSqA = 0, sz = n;
+        for(long long i = 0 ; i < n ; i++) {
+            sum_all += i + 1;
+            sumA += arr[i];
+            sumSq_all += (i + 1) * (i + 1);
+            sumSqA += ((long long)(arr[i])) * arr[i];
         }
 
-        int missing, repeated;
-        for(int i = 0 ; i < n ; i++) {
-            if(count[i] == 0) {
-                missing = i + 1;
-            } else if(count[i] == 2) {
-                repeated = i + 1;
-            }
-        }
-        int *res(new int[2]{repeated, missing});
+        long long diff = sum_all - sumA;
+        long long diffSq = sumSq_all - sumSqA;
+
+        long long sum = diffSq / diff;
+        int missing = (sum + diff) >> 1;
+        int repeated = sum - missing;
+        int *res(new int[2]{ repeated, missing });
         return res;
     }
 };

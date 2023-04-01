@@ -10,10 +10,7 @@ using namespace std;
 class Solution {
   public:
     long long int minOperations(int N) {
-        long long half = (N + 1LL) >> 1;
-        if(N & 1)
-            return (half * (N - 1)) >> 1;
-        return (half * N) >> 1;
+        return (((N + 1LL) >> 1) * (N - (N & 1))) >> 1;
     }
 };
 

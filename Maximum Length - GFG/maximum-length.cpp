@@ -10,14 +10,9 @@ using namespace std;
 class Solution {
 public:
     int solve(int a, int b, int c) {
-        if(a < b)
-            swap(a, b);
-        if(a < c)
-            swap(a, c);
-        if(a > (b + c + 1) * 2)
-            return -1;
-        else
-            return a + b + c;
+        if(a < b)   swap(a, b);
+        if(a < c)   swap(a, c);
+        return (a > (b + c + 1) * 2) ? -1 : (a + b + c);
     }
 };
 

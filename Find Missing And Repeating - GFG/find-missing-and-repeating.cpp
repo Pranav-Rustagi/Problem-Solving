@@ -4,23 +4,41 @@
 using namespace std;
 
 // } Driver Code Ends
-
 class Solution{
 public:
-    int *findTwoElement(int *arr, int n) {
-        sort(arr, arr + n);
-        int missing = n, repeated = n;
+    vector<int> findTwoElement(vector<int> arr, int n) {
+        int x = 0;
         for(int i = 0 ; i < n ; i++) {
-            if((i == 0 && arr[i] == 2) || (i && arr[i] - arr[i - 1] > 1)) {
-                missing = arr[i] - 1;
+            x ^= (arr[i] ^ (i + 1));
+        }
+        
+        int b = 1;
+        while(!(x & b)) {
+            b <<= 1;
+        }
+        
+        int x1 = 0, x2 = 0;
+        for(int i = 0 ; i < n ; i++) {
+            if((i + 1) & b) {
+                x1 ^= (i + 1);
+            } else {
+                x2 ^= (i + 1);
             }
-
-            if(i && arr[i] == arr[i - 1]) {
-                repeated = arr[i];
+            
+            if(arr[i] & b) {
+                x1 ^= arr[i];
+            } else {
+                x2 ^= arr[i];
             }
         }
-        int *res(new int[2]{ repeated, missing });
-        return res;
+        
+        for(int i = 0 ; i < n ; i++) {
+            if(x2 == arr[i]) {
+                swap(x1, x2);
+                break;
+            }
+        }
+        return { x1, x2 };
     }
 };
 
@@ -32,7 +50,7 @@ int main() {
     while (t--) {
         int n;
         cin >> n;
-        int a[n];
+        vector<int> a(n);
         for (int i = 0; i < n; i++) {
             cin >> a[i];
         }

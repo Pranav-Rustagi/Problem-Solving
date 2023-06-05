@@ -111,31 +111,40 @@ struct Node{
 
 /*  Function which returns the  root of 
     the flattened linked list. */
-class Compare {
-    public:
-    bool operator()(const Node * above, const Node * below) {
-        return above -> data > below -> data;
+Node *merge(Node *l1, Node *l2) {
+    Node *res = NULL, *cur;
+    while(l1 && l2) {
+        if(l1 -> data < l2 -> data) {
+            if(res) {
+                cur = cur -> bottom = l1;
+            } else {
+                res = cur = l1;
+            }
+            l1 = l1 -> bottom;
+        } else {
+            if(res) {
+                cur = cur -> bottom = l2;
+            } else {
+                res = cur = l2;
+            }
+            l2 = l2 -> bottom;
+        }
     }
-};
+    
+    l1 = l1 ? l1 : l2;
+    cur -> bottom = l1;
+    return res;
+}
 
 Node *flatten(Node *root) {
-    priority_queue<Node*, vector<Node*>, Compare> pq;
-    Node *cur = root, *newHead = root;
-    if(root -> bottom)
-        pq.push(root -> bottom);
-    if(root -> next)
-        pq.push(root -> next);
-    while(!pq.empty()) {
-        root = pq.top();
-        pq.pop();
-        if(root -> next)
-            pq.push(root -> next);
-        if(root -> bottom)
-            pq.push(root -> bottom);
-        cur -> bottom = root;
-        cur -> next = NULL;
-        cur = cur -> bottom;
+    Node *ls = root -> next, *nxt;
+    root -> next = NULL;
+    while(ls) {
+        nxt = ls -> next;
+        ls -> next = NULL;
+        root = merge(ls, root);
+        ls = nxt;
     }
-    return newHead;
+    return root;
 }
 

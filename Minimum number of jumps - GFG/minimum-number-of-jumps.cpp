@@ -9,25 +9,22 @@ using namespace std;
 class Solution{
   public:
     int minJumps(int arr[], int n){
-        int l = 0, r = 0;
-        int count = 0;
+        int l = 0, r = 0, count = 0;
         while(r < n - 1) {
             count++;
-            int maxR = r;
-            int newL;
+            int mind = l;
             for(int i = l ; i <= r ; i++) {
-                if(maxR < i + arr[i]) {
-                    maxR = i + arr[i];
-                    l = i + 1;
+                if(mind + arr[mind] < i + arr[i]) {
+                    mind = i;
                 }
             }
             
-            if(r == maxR) {
+            if(mind + arr[mind] <= r) {
                 return -1;
             }
-            r = maxR;
+            l = mind + 1;
+            r = mind + arr[mind];
         }
-        
         return count;
     }
 };

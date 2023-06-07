@@ -21,24 +21,24 @@ struct Item{
 class Solution
 {
     public:
+    //Function to get the maximum total value in the knapsack.
     double fractionalKnapsack(int W, Item arr[], int n) {
-        double res = 0;
-        sort(arr, arr + n, [](const Item & a, const Item & b) {
-            return (double(a.value) / a.weight) > (double(b.value) / b.weight);
+        double profit = 0;
+        sort(arr, arr + n, [](const Item & a, const Item& b) {
+            return double(a.value) / a.weight < double(b.value) / b.weight;
         });
         
-        int i = 0;
-        while(i < n) {
-            if(arr[i].weight <= W) {
-                W -= arr[i].weight;
-                res += arr[i].value;
-                i++;
+        while(n--) {
+            Item & it = arr[n];
+            if(W >= it.weight) {
+                W -= it.weight;
+                profit += it.value;
             } else {
-                res += (double(arr[i].value) / arr[i].weight) * W;
+                profit += (double(it.value) / it.weight) * W;
                 break;
             }
         }
-        return res;
+        return profit;
     }
         
 };

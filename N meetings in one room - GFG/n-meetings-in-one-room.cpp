@@ -10,17 +10,18 @@ class Solution
     //be performed in a meeting room.
     int maxMeetings(int start[], int end[], int n)
     {
-        vector<vector<int>> v;
+        vector<pair<int, int>> v;
         for(int i = 0 ; i < n ; i++) {
             v.push_back({ end[i], start[i] });
         }
         
         sort(v.begin(), v.end());
-        int count = 0, b = v[0][1] - 1;
-        for(int i = 0 ; i < n ; i++) {
-            if(v[i][1] > b) {
+        int count = 0, b = -1;
+        
+        for(auto& m : v) {
+            if(m.second > b) {
                 count++;
-                b = v[i][0];
+                b = m.first;
             }
         }
         return count;

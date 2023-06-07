@@ -23,27 +23,28 @@ struct Job
 };
 */
 
-class Solution {
+class Solution 
+{
     public:
     //Function to find the maximum profit and the number of jobs done.
     vector<int> JobScheduling(Job arr[], int n)  { 
-        int done[n + 1] = {0};
-        
-        sort(arr, arr + n, [](const Job & a, const Job & b) {
+        sort(arr, arr + n, [](const Job& a, const Job& b) {
             return a.profit > b.profit;
         });
         
-        vector<int> res = { 0, 0 };
+        bool comp[n + 1] = {false};
+        
+        vector<int> res(2, 0);
         for(int i = 0 ; i < n ; i++) {
-            Job & j = arr[i];
-            while(j.dead) {
-                if(done[j.dead] == 0) {
-                    done[j.dead] = 1;
-                    res[0]++;
-                    res[1] += j.profit;
-                    break;
-                }
-                j.dead--;
+            int j = arr[i].dead;
+            while(j > 0 && comp[j] != 0) {
+                j--;
+            }
+            
+            if(j > 0) {
+                res[0]++;
+                res[1] += arr[i].profit;
+                comp[j] = 1;
             }
         }
         return res;

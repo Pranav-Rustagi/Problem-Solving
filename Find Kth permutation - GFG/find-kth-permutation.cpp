@@ -11,14 +11,10 @@ using namespace std;
 class Solution
 {
 public:
-    string kthPermutation(int n, int k)
-    {
+    string kthPermutation(int n, int k) {
         string s;
-        for(char ch = '1' ; n ; n--)
-            s.push_back(ch++);
-        while(--k) {
-            next_permutation(s.begin(), s.end());
-        }
+        for(char ch = '1' ; n ; n--)    s.push_back(ch++);
+        while(--k)                      next_permutation(s.begin(), s.end());
         return s;
     }
 };

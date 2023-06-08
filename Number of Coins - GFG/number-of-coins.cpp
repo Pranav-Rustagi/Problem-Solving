@@ -4,23 +4,24 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution{
-
 	public:
-	int minCoins(int coins[], int M, int V) 
-	{ 
-	    vector<int> v(V + 1, -1);
-	    v[0] = 0;
-	    int sCoin = INT_MAX;
+	
+	int minCoins(int coins[], int M, int V) {
+	    int dp[V + 1] = {0};
+	    for(int i = 1 ; i <= V ; i++)
+	        dp[i] = -1;
+	        
 	    for(int i = 1 ; i <= V ; i++) {
 	        for(int j = 0 ; j < M ; j++) {
-	            if(i >= coins[j] && v[i - coins[j]] != -1 && (v[i] == -1 || v[i] > 1 + v[i - coins[j]])) {
-	                v[i] = 1 + v[i - coins[j]];
+	            if(coins[j] <= i && dp[i - coins[j]] != -1) {
+	                int val = 1 + dp[i - coins[j]];
+	                dp[i] = dp[i] == -1 ? val : min(dp[i], val);
 	            }
 	        }
 	    }
 	    
-	    return v[V];
-	} 
+	    return dp[V];
+	}
 	  
 };
 

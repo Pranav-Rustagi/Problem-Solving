@@ -6,35 +6,34 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
 public:
-    vector<int> placed;
-    
-    bool solve(bool graph[101][101], int n, int m, int ind = 0) {
-        if(ind == n) {
+    bool solve(bool graph[101][101], int asmt[], int m, int n, int node = 0) {
+        if(node == n) {
             return true;
         }
         
-        for(int i = 0 ; i < m ; i++) {
-            placed[ind] = n + i;
-            bool isValid = true;
+        for(int i = 1 ; i <= m ; i++) {
+            bool ncontf = true;
             for(int j = 0 ; j < n ; j++) {
-                if(ind != j && (graph[ind][j] || graph[j][ind]) && placed[j] == n + i) {
-                    isValid = false;
+                if(node != j && graph[node][j] && asmt[j] == i) {
+                    ncontf = false;
                     break;
                 }
             }
             
-            if(isValid && solve(graph, n, m, ind + 1)) {
-                return true;
+            if(ncontf) {
+                asmt[node] = i;
+                if(solve(graph, asmt, m, n, node + 1)) {
+                    return true;
+                }
+                asmt[node] = 0;
             }
-            placed[ind] = -1;
         }
-        
         return false;
     }
     
     bool graphColoring(bool graph[101][101], int m, int n) {
-        placed.resize(n, -1);
-        return solve(graph, n, m);
+        int asmt[n] = {0};
+        return solve(graph, asmt, m, n, 0);
     }
 };
 

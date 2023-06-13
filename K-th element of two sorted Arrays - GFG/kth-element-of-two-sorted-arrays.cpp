@@ -21,9 +21,7 @@ class Solution{
             int left2 = cut2 == 0 ? INT_MIN : arr2[cut2 - 1];
             int right2 = cut2 == m ? INT_MAX : arr2[cut2];
             
-            if(cut2 > m) {
-                s = cut1 + 1;
-            } else if(left1 > right2) {
+            if(left1 > right2) {
                 e = cut1 - 1;
             } else if(left2 > right1) {
                 s = cut1 + 1;

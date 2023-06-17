@@ -15,13 +15,18 @@ class Solution{
     // Function to insert element into the queue
     void insert(queue<int> &q, int k){
         q.push(k);
-        m[k]++;
     }
     
     // Function to find frequency of an element
     // return the frequency of k
     int findFrequency(queue<int> &q, int k){
-        return m[k];
+        int count = 0, sz = q.size();
+        while(sz--) {
+            if(q.front() == k)  count++;
+            q.push(q.front());
+            q.pop();
+        }
+        return count;
     }
     
 };

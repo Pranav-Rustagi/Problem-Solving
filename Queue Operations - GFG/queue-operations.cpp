@@ -8,9 +8,6 @@ using namespace std;
 // Helper class Solution to implement 
 // insert() and findFrequency()
 class Solution{
-    private:
-    unordered_map<int, int> m;
-    
     public:
     // Function to insert element into the queue
     void insert(queue<int> &q, int k){

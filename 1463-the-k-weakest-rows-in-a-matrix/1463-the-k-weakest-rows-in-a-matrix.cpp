@@ -2,18 +2,22 @@ class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         priority_queue<pair<int, int>> pq;
-        for(int i = 0 ; i < mat.size() ; i++) {
+        int n = mat.size(), m = mat[0].size(), sz = 0;
+
+        for(int i = 0 ; i < n ; i++) {
             int count = 0;
-            while(count < mat[0].size() && mat[i][count] == 1) {
+            while(count < m && mat[i][count] == 1) {
                 count++;
             }
 
-            if(pq.size() == k && pq.top().first > count) {
+            if(sz == k && pq.top().first > count) {
                 pq.pop();
+                sz--;
             }
 
-            if(pq.size() < k) {
+            if(sz < k) {
                 pq.push({ count, i });
+                sz++;
             }
         }
 

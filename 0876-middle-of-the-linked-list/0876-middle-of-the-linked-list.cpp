@@ -10,20 +10,14 @@
  */
 class Solution {
 public:
-    int getLen(ListNode* head) {
-        int count = 0;
-        while(head) {
-            ++count;
-            head = head -> next;
-        }
-        return count;
-    }
-    
     ListNode* middleNode(ListNode* head) {
-        int n = (getLen(head) >> 1);
-        while(n--){
-            head = head -> next;
+        ListNode *slow = head, *fast = head;
+        
+        while(fast && fast -> next) {
+            slow = slow -> next;
+            fast = fast -> next -> next;
         }
-        return head;
+        
+        return slow;
     }
 };

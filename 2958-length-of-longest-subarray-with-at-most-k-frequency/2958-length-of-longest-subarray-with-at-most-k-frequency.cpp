@@ -5,19 +5,17 @@ public:
         cin.tie(0);
         cout.tie(0);
         
-        unordered_map<int, queue<int>> lo;
+        unordered_map<int, int> freq;
+        int n = nums.size(), i = 0, j = 0, res = 0;
         
-        int n = nums.size(), si = -1, res = 0;
-        
-        for(int i = 0 ; i < n ; i++) {
-            lo[nums[i]].push(i);
-            
-            if(lo[nums[i]].size() > k) {
-                si = max(si, lo[nums[i]].front());
-                lo[nums[i]].pop();
+        while(j < n) {
+            freq[nums[j]]++;
+            while(freq[nums[j]] > k) {
+                freq[nums[i++]]--;
             }
             
-            res = max(res, i - si);
+            res = max(res, j - i + 1);
+            j++;
         }
         
         return res;

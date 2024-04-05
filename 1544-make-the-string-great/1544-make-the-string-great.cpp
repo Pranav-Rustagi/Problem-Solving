@@ -1,15 +1,21 @@
 class Solution {
 public:
+    bool isMatch(char a, char b) {
+        return abs(a - b) == 32;
+    }
+    
     string makeGood(string s) {
-        string r;
-        int diff = 'a' - 'A';
-        for(auto & ch : s) {
-            bool f = r.size() && (r.back() == ch + diff || r.back() == ch - diff);
-            if(f)
-                r.pop_back();
-            else
-                r.push_back(ch);
+        int n = s.size();
+        string res;
+        
+        for(char ch : s) {
+            if(res.empty() || !isMatch(res.back(), ch)) {
+                res.push_back(ch);
+            } else {
+                res.pop_back();
+            }
         }
-        return r;
+        
+        return res;
     }
 };

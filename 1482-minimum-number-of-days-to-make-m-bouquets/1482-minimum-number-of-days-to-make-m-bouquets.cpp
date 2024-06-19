@@ -1,14 +1,10 @@
 class Solution {
 public:
     int minDays(vector<int>& bloomDay, int m, int k) {
-        int n = bloomDay.size(), s = INT_MAX, e = INT_MIN;
-        if(n < m * 1LL * k) {
-            return -1;
-        }
+        int n = bloomDay.size(), s = *min_element(bloomDay.begin(), bloomDay.end()), e = 1e9;
         
-        for(int d : bloomDay) {
-            s = min(s, d);
-            e = max(e, d);
+        if(n < m * 1L * k) {
+            return -1;
         }
         
         while(s < e) {

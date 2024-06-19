@@ -1,9 +1,11 @@
 class Solution {
 public:
     int minDays(vector<int>& bloomDay, int m, int k) {
-        int n = bloomDay.size(), s = *min_element(bloomDay.begin(), bloomDay.end()), e = 1e9;
+        ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
         
-        if(n < m * 1L * k) {
+        int s = *min_element(bloomDay.begin(), bloomDay.end()), e = 1e9;
+        
+        if(bloomDay.size() < m * 1L * k) {
             return -1;
         }
         
